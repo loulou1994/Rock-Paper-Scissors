@@ -1,0 +1,146 @@
+@use "./game-interface" as *;
+@use "./assets" as *;
+
+.game {
+
+    &--result{
+        --gap: #{rem(90) 0};
+        grid-template-columns: repeat(2, max-content);
+        justify-content: space-between;
+        align-items: flex-end;
+
+        @include breakpoint(medium){
+            --gap: #{rem(40) 0};
+            width: auto;
+            align-items: flex-start;
+        }
+        
+        @include breakpoint(medium-large){
+            --gap: #{0 rem(64)};
+            margin-bottom: #{rem(24)};
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+
+        }
+    }
+
+    &--item{
+        --gap: #{rem(24)};
+        flex-direction: column;
+        align-items: center;
+
+        @include breakpoint(large-sml){
+            flex-direction: column-reverse;
+        }
+
+        .player--item{
+            position: relative;
+            width: clamp(120px, 100px + 5.5vw, 200px);
+            background: #E6E6E6;
+            border: #{rem(14)} solid;
+            box-shadow: inset 0px 7px 2px rgb(0 0 0 / 25%);
+            padding: #{rem(15) rem(20.8)};
+
+            @include breakpoint(large-sml){
+                width: #{rem(232)};
+                border-width: #{rem(28)};
+            }
+
+            img{
+                margin: auto;
+                flex: .8;
+
+                @include breakpoint(large-sml){
+                    flex: .65;
+                }
+            }
+
+            .winner-circle{
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                transform: scale(2.8);
+                inset: 0;
+                z-index: -1;
+                border-radius: inherit;
+                opacity: 0.5;
+                background-image: repeating-radial-gradient(#fff1 11%, #fff2 26%);
+            }
+        }
+        
+        .empty-item {
+            align-self: center;
+            width: clamp(90px, 80px + 5.5vw, 140px);
+            background-color: $clr-black;
+            opacity: .4;
+        }
+
+        .player--item, .empty-item{
+            border-radius: 50%;
+            aspect-ratio: 1;
+        }
+
+        &:nth-child(1){
+            align-self: flex-end;
+            justify-self: flex-start;
+
+            @include breakpoint(large-sml){
+                justify-self: flex-end;
+            }
+        }
+        
+        &:nth-child(2){
+            --gap: #{rem(32)};
+            justify-self: flex-end;
+
+            @include breakpoint(large-sml){
+                --gap: #{rem(64)};
+                justify-self: flex-start;
+            }
+        }
+    }
+
+    &--result__winner{
+        grid-column: span 2;
+        place-self: center;
+        text-align: center;
+
+        @include breakpoint(medium-large){
+            grid-area: 1 / 2;
+        }
+
+        .winner-text{
+            font-size: var(--fs-700);
+            margin-bottom: #{rem(8)};
+            
+            @include breakpoint(medium){
+                font-size: #{rem(40)};
+            }
+
+            @include breakpoint(large-sml){
+                font-size: var(--fs-700);
+            }
+        }
+
+        .winner-restart{
+            padding: #{rem(10) rem(64)};
+            font-size: var(--fs-500);
+            color: $clr-text;
+            border: 0;
+            border-radius: #{rem(8)};
+            font-weight: 700;
+            letter-spacing: 2.5px;
+
+            @include breakpoint(medium-large){
+                padding-inline:#{rem(32)};
+            }
+            
+            @include breakpoint(large-sml){
+                padding-inline:#{rem(64)};
+            }
+
+            &:hover{
+                color: $clr-rock
+            }
+        }
+    }
+}

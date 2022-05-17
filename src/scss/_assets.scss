@@ -1,0 +1,42 @@
+@use "sass:math";
+
+// colors
+  // primary
+$clr-scissors: hsl(39, 89%, 49%);
+$clr-paper: hsl(230, 89%, 62%);
+$clr-rock: hsl(349, 71%, 52%);
+$clr-lizard: hsl(261, 73%, 60%);
+$clr-spock: hsl(189, 59%, 53%);
+$clr-white: hsl(0, 0%, 100%);
+$clr-black: hsl(0, 0%, 0%);
+
+ //Neutral
+$clr-text: hsl(229, 25%, 31%);
+$clr-score: hsl(229, 64%, 46%);
+$clr-outline: hsl(217, 16%, 45%);
+
+//background
+$clr-bg: hsl(214, 47%, 23%);
+$bg-btn: hsl(0, 0%, 94%);
+
+// font
+$main-ff: 'Barlow Semi Condensed', sans-serif;
+
+$breakpoints-up: (
+    "small": "25.9375em",
+    "medium": "30em",
+    "medium-large": "43.75em",
+    "large-sml": "51.8125em"
+);
+
+// media queries
+@mixin breakpoint($size){
+    @media (min-width: map-get($breakpoints-up, $size)){
+        @content;
+    }
+};
+
+// convert px to rem unit
+@function rem($value, $base: 16){
+    @return math.div($value, $base) * 1rem;
+}

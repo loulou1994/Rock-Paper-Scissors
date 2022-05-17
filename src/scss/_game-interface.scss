@@ -1,0 +1,132 @@
+@use "./assets" as *;
+
+.game {
+  width: min(#{rem(480), 100%});
+  margin-inline: auto;
+  grid-template-columns: repeat(2, 1fr);
+
+  background-repeat: no-repeat;
+
+  &.medium {
+    --gap: #{rem(8) rem(48)};
+    background-size: 65%;
+    background-position: center #{rem(55)};
+
+    @include breakpoint(medium) {
+      --gap: #{rem(32)} 0;
+      background-position: center;
+    }
+  }
+
+  &.hard {
+    --gap: #{rem(32)} 0;
+    grid-template-areas:
+                    "scissors scissors"
+                    "spock paper"
+                    "lizard rock";
+    background-size: 90%;
+    background-position: center #{rem(65)};
+    justify-items: center;
+
+    @include breakpoint(small) {
+        background-size: 75%;
+    }
+
+    @include breakpoint(large-sml) {
+        --gap: #{rem(32)} 0;
+        background-size: 80%;
+    }
+  }
+
+  &__item {
+    // position: relative;
+    // width: 127px;
+    padding: #{rem(15) rem(20.8)};
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: #e6e6e6;
+    box-shadow: inset 0px 7px 2px rgb(0 0 0 / 25%);
+    
+    &.paper {
+      border-color: $clr-paper;
+    }
+    
+    &.scissors {
+        border-color: $clr-scissors;
+    }
+
+    &.rock {
+      border-color: $clr-rock;
+    }
+    
+    &.lizard {
+        border-color: $clr-lizard;
+    }
+
+    &.spock {
+        border-color: $clr-spock;
+    }
+
+    &.medium {
+        justify-self: center;
+        width: clamp(#{rem(100)}, #{rem(100)} + 8vw, #{rem(200)});
+        border-width: #{rem(14)};
+
+      @include breakpoint(medium){
+        border-width: #{rem(20)};
+      }
+    }
+
+    &.medium:first-child {
+      @include breakpoint(large-sml) {
+        justify-self: start;
+      }
+    }
+    &.medium:nth-child(2) {
+      @include breakpoint(large-sml) {
+        justify-self: end;
+      }
+    }
+    
+    &.medium:last-child {
+        grid-column: span 2;
+    }
+
+    &.hard {
+      width: clamp(#{rem(100)}, #{rem(70)} + 8vw, #{rem(150)});
+      border-width: #{rem(11)};
+      
+      @include breakpoint(medium-large){          
+          border-width: #{rem(18)};
+      }
+    }
+
+    &.hard:first-child {
+      grid-area: scissors;
+    }
+    
+    &.hard:nth-child(2) {
+        grid-area: spock;
+        justify-self: start;
+    }
+    
+    &.hard:nth-child(3) {
+        grid-area: paper;
+        justify-self: end;
+    }
+    
+    &.hard:nth-child(4) {
+        grid-area: lizard;
+    }
+    
+    &.hard:last-child {
+        grid-area: rock;
+    }
+
+    img {
+      height: 75%;
+      margin: auto;
+      object-fit: cover;
+    }
+  }
+}

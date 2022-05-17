@@ -1,0 +1,84 @@
+@use "assets" as *;
+
+.btn-container{
+    flex-direction: column;
+    align-items: center;
+
+    @include breakpoint(medium){
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .game-rules {
+        --flow-space: #{rem(72)};
+        padding: #{rem(7) rem(37)};
+        background-color: transparent;
+        border: #{rem(2)} solid $clr-white;
+        border-radius: #{rem(8)};
+        letter-spacing: 2px;
+        transition: background-color 250ms ease-in-out;
+    
+        @include breakpoint(medium-large){
+            --flow-space: 0;
+        }
+    
+        &:hover{
+            background-color: $clr-white;
+            color: $clr-black;
+        }
+    }
+}
+
+.rules-container {
+    --flow-space: 0;
+    position: fixed;
+    inset: 0;
+    background-color: hsl(0deg, 0%, 100%);
+    
+    @include breakpoint(medium){
+        background-color: hsl(0deg, 0%, 0%, .5);
+    }
+}
+
+.rules {
+    margin: auto;
+
+    @include breakpoint(medium){
+        padding: #{rem(30)};
+        grid-template-columns: repeat(2, max-content);
+        gap: #{rem(48)} 0;
+        background-color: hsl(0deg, 0%, 100%);
+        border-radius: #{rem(8)};
+    }
+
+    &__title {
+        color: $clr-text;
+        font-weight: 700;
+
+        @include breakpoint(medium){
+            justify-self: flex-start;
+        }
+    }
+
+    &__close {
+        --flow-space: #{rem(140)};
+        grid-row: 3;
+        justify-self: center;
+        background-color: transparent;
+        border: 0;
+        padding: 0;
+
+        @include breakpoint(medium){
+            --flow-space: 0;
+            grid-area: 1 / 2;
+            justify-self: flex-end;
+        }
+    }
+
+    &__illustration{
+
+        @include breakpoint(medium){
+            grid-column: span 2;
+        }
+    }
+}
